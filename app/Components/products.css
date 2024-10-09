@@ -1,0 +1,63 @@
+/* Container for the product grid */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);  /* 3 columns for products */
+    gap: 20px;  
+    padding: 20px;
+    justify-items: center;
+}
+
+/* Styling for individual product cards */
+.product-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    overflow: hidden;
+    padding: 16px;
+    max-width: 320px;
+    width: 100%;  /* Cards should take full width in grid column */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Subtle shadow */
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.product-card:hover {
+    transform: translateY(-8px);  /* Lift effect */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);  /* Stronger shadow on hover */
+}
+
+.product-image {
+    border-radius: 8px;
+    margin-bottom: 16px;
+}
+
+.product-title {
+    font-size: 1.4em;
+    font-weight: 600;
+    color: #333;
+    margin: 8px 0;
+    text-align: center;
+}
+
+.product-description {
+    font-size: 1em;
+    color: #666;
+    text-align: center;
+    margin: 12px 0;
+}
+
+/* Optional: make product cards responsive for smaller screens */
+@media screen and (max-width: 768px) {
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);  /* 2 columns on tablet screens */
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .product-grid {
+        grid-template-columns: 1fr;  /* 1 column on mobile */
+    }
+}
