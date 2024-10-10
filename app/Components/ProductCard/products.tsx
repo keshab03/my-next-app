@@ -1,5 +1,6 @@
 import Image from "next/image";
 import './products.css';
+import Link from "next/link";
 
 interface ProductProps {
     image: string;
@@ -8,8 +9,9 @@ interface ProductProps {
     id: number;
 }
 
-const ProductCard = ({ image, title, description }: ProductProps) => {
+const ProductCard = ({ image, title, description,id }: ProductProps) => {
     return (
+        <Link href={`/products/${id}`}>
         <div className="product-card">
             <Image className="product-image" src={image} alt={title} width={300} height={220} />
             <div>
@@ -17,6 +19,7 @@ const ProductCard = ({ image, title, description }: ProductProps) => {
                 <p className="product-description">{description.substring(0, 100)}...</p>
             </div>
         </div>
+        </Link>
     );
 };
 

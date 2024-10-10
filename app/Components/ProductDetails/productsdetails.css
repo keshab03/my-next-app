@@ -1,0 +1,36 @@
+.product-details-container {
+    background-color: #f4f4f9;
+    border-radius: 10px;
+    width: 600px;
+    margin: 10px auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+h1 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+p {
+    font-size: 1.1rem;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.product-info {
+    display: flex;
+    justify-content: space-around;
+}
+
+.product-info p {
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.product-info strong {
+    color: #444;
+}

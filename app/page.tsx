@@ -1,6 +1,5 @@
-import styles from "./page.module.css";
 import axios from "axios";
-import ProductCard from "./Components/products";
+import ProductCard from "./Components/ProductCard";
 
 interface productDetails {
   images: string;
@@ -9,12 +8,14 @@ interface productDetails {
   id: number;
 }
 
-export default async function Home() {
+export default async function Home({ searchParams }: { searchParams: { search?: string } }) {
+  const searchTerm = searchParams.search?.toLowerCase() || "";
+
   const getData = async () => {
     try {
-      const data = await axios.get('https://dummyjson.com/products')
-      if (data) {
-        return data.data.products;
+      const response = await axios.get('https://dummyjson.com/products');
+      if (response && response.data) {
+        return response.data.products;
       } else {
         console.log("No Data Found");
       }
@@ -23,21 +24,41 @@ export default async function Home() {
     }
   };
 
-  const allData = await getData();
+  const allProducts = await getData();
+
+  // Filter products based on search term
+  const filteredProducts = allProducts.filter((product: productDetails) =>
+    product.title.toLowerCase().includes(searchTerm)
+  );
 
   return (
-    <div className={styles.page}>
+    <div className="page">
       <h2>Product List</h2>
+      <form method="GET" action="/">
+        <input
+          type="text"
+          name="search"
+          placeholder="Search by title"
+          defaultValue={searchTerm}
+          className="search-bar"
+        />
+        <button type="submit">Search</button>
+      </form>
+
       <div className="product-grid">
-        {allData && allData.map((product: productDetails) => (
-          <ProductCard
-            key={product.id}
-            image={product.images[0]}
-            title={product.title}
-            description={product.description}
-            id={product.id}
-          />
-        ))}
+        {filteredProducts.length > 0 ? (
+          filteredProducts.map((product: productDetails) => (
+            <ProductCard
+              key={product.id}
+              image={product.images[0]}
+              title={product.title}
+              description={product.description}
+              id={product.id}
+            />
+          ))
+        ) : (
+          <p>No products found</p>
+        )}
       </div>
     </div>
   );
